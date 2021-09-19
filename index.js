@@ -33,7 +33,7 @@ app.use(morgan('common'));
 
 //error handling
 const bodyParser = require('body-parser'),
-methodOverrider = require('method-override');
+methodOverride = require('method-override');
 
 app.use(bodyParser.urlencoded({
   extdended: true
