@@ -3,6 +3,18 @@ morgan = require('morgan');
 
 const app = express();
 
+let topMovies = [
+  {
+    title: 'Goodfellas',
+  },
+  {
+    title: 'Casino',
+  },
+  {
+    title: 'The Departed',
+  }
+];
+
 //returns JSON object containing top 10 movies
 app.get('/movies', (req, res) => {
   res.json(topMovies);
