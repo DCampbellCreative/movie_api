@@ -1,9 +1,10 @@
 const express = require('express'),
-morgan = require('morgan');
+morgan = require('morgan'),
+uuid = require('uuid');
 
 const app = express();
 
-let topMovies = [
+let movies = [
   {
     title: 'Goodfellas',
   },
@@ -15,9 +16,52 @@ let topMovies = [
   }
 ];
 
-//returns JSON object containing top 10 movies
+//returns JSON object containing all movies
 app.get('/movies', (req, res) => {
-  res.json(topMovies);
+  res.send('Successful GET request returning data on all movies.');
+});
+
+//returns JSON object containing data about a single movie
+app.get('/movies/:title', (req, res) => {
+  res.send('Successful GET request returning data on one movie.');
+});
+
+//returns JSON object containing data about a movies genre
+app.get('/movies/:title/:genre', (req, res) => {
+  res.send('Successful GET request returning data on one movies genre.');
+});
+
+//returns JSON object containing data about a director
+app.get('/movies/:title/:director', (req, res) => {
+  res.send('Successful GET request returning data on a director.');
+});
+
+//adds user account
+app.post('/users', (req, res) => {
+  let newUser = req.body;
+
+  if(!newUser.name) {
+    const message = 'Missing name in request body';
+    res.status(400).send(message);
+  } else {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).send(newUser);
+  }
+});
+
+//updates user info
+app.put('/users/:name', (req, res) => {
+  let user = user.find((user) => { return user.name === req.params.name })
+
+//deletes a user from list
+app.delete('/users/:name', (req, res) => {
+  let user = user.find((user) => { return user.name === req.params.name});
+
+  if (user) {
+    user = user.filter((obj) => { return obj.name !== req.params.name});
+    res.status(201).send('User ' + req.params.name + ' was deleted.');
+  }
 });
 
 //returns default text response
