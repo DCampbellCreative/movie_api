@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-      <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+      <link rel="stylesheet" type="text/css" src="../css/styles.css" />
     <title>Movie API Documentation</title>
   </head>
   <body>
@@ -12,82 +12,93 @@
     movies, directors, and genres. Users are able to sign up, update their
     personal information, and create a list of their favorite movies.</p>
 
-    <table>
-<thead>
-  <tr>
-    <th>Business Logic</th>
-    <th>URL</th>
-    <th>HTTP Method</th>
-    <th>Request Body Data</th>
-    <th>Response Body Data</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Return a list of ALL movies to the user</td>
-    <td>/movies</td>
-    <td>GET</td>
-    <td></td>
-    <td>A JSON object holding data about all movies.</td>
-  </tr>
-  <tr>
-    <td>Return data about a single movie by title to the user</td>
-    <td>/movies/[title]</td>
-    <td>GET</td>
-    <td></td>
-    <td>A JSON object holding data about a single movie.</td>
-  </tr>
-  <tr>
-    <td>Return data about a genre by name/title</td>
-    <td>/movies/[title]/[genre]</td>
-    <td>GET</td>
-    <td></td>
-    <td>A JSON object holding data about a movie's genre.</td>
-  </tr>
-  <tr>
-    <td>Return data about a director by name</td>
-    <td>/movies/[title]/[director]</td>
-    <td>GET</td>
-    <td></td>
-    <td>A JSON object holding data about a director.</td>
-  </tr>
-  <tr>
-    <td>Allow new users to register</td>
-    <td>/users</td>
-    <td>POST</td>
-    <td></td>
-    <td>A text message showing that the user's account was created.</td>
-  </tr>
-  <tr>
-    <td>Allow users to update their user info</td>
-    <td>/users/[name]</td>
-    <td>PUT</td>
-    <td></td>
-    <td>A text message showing that the user's info was updated.</td>
-  </tr>
-  <tr>
-    <td>Allow users to add a movie to their list of favorites</td>
-    <td>/users/[name]/favorites</td>
-    <td>POST</td>
-    <td></td>
-    <td>A text message showing that the favorited title was added.</td>
-  </tr>
-  <tr>
-    <td>Allow users to remove a movie from their list of favorites</td>
-    <td>/users/[name]/favorites</td>
-    <td>DELETE</td>
-    <td></td>
-    <td>A text message showing that the favorited title was removed.</td>
-  </tr>
-  <tr>
-    <td>Allow existing users to deregister</td>
-    <td>/users</td>
-    <td>DELETE</td>
-    <td></td>
-    <td>A text message showing that the user was deregistered.</td>
-  </tr>
-</tbody>
-</table>
-
-  </body>
-</html>
+  <table class='table'>
+  <thead>
+    <tr>
+      <th>Business Logic</th>
+      <th>URL</th>
+      <th>HTTP Method</th>
+      <th>Request Body Data</th>
+      <th>Response Body Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Return a list of ALL movies to the user</td>
+      <td>/movies</td>
+      <td>GET</td>
+      <td></td>
+      <td>A JSON object holding data about all movies.</td>
+    </tr>
+    <tr>
+      <td>Return data about a single movie by title to the user</td>
+      <td>/movies/[Title]</td>
+      <td>GET</td>
+      <td></td>
+      <td>A JSON object holding data about a single movie. Formatted:<br>{<br>"Genre":<br>{<br>"Name" : "Drama",<br>"Description" : "Description"<br>},<br>"Director":<br>{<br>"Name" : "Martin Scorsese",<br>"Bio": "Bio"<br>,"Birth" : "1942"<br>},<br>"Actors" : [],<br>"_id" : "61534a44fe7a57055294b89f",<br>"Title" : "The Departed",<br>"Description" : "Descripton",<br>"ImagePath" : "thedeparted.png",<br>"Featured" : true<br>}</td>
+    </tr>
+    <tr>
+      <td>Return data about a genre by name/title</td>
+      <td>/genres/[Name]</td>
+      <td>GET</td>
+      <td></td>
+      <td>A JSON object holding data about a movie genre. Formatted:<br>"Genre":<br>{<br>"Name" : "Drama",<br>"Description" : "Description"<br>},<br></td>
+    </tr>
+    <tr>
+      <td>Return data about a director by name</td>
+      <td>/directors/[Name]</td>
+      <td>GET</td>
+      <td></td>
+      <td>A JSON object holding data about a single director. Formatted:<br>{<br>"Name" : "Martin Scorsese",<br>"Bio": "Bio<br>"<br>,"Birth" : "1942"<br>},<br></td>
+    </tr>
+    <tr>
+      <td>Allow new users to register</td>
+      <td>/users</td>
+      <td>POST</td>
+      <td>{<br>"Username" : "MovieGuy555",<br>"Password" :  "12345678",<br>"Email" : "movieguy555@gmail.com",<br>"Birthday" : "01/01/80"<br>}</td>
+      <td>A JSON object holding data about the user added. Formatted:<br>{<br> "Username" : "MovieGuy555",<br>"Password" : "12345678",<br>"Email" : "movieguy555@gmail.com",<br>"Birthday" : "1980-01-01T05:00:00.000Z",<br>"FavoriteMovies" : [],<br>"_id" : "61579244b61674c21f372eec",<br>"__v" : 0<br>}</td>
+    </tr>
+    <tr>
+      <td>Return a list of ALL users</td>
+      <td>/users</td>
+      <td>GET</td>
+      <td></td>
+      <td>A JSON object holding data about all users.</td>
+    </tr>
+    <tr>
+      <td>Return data about a single user by username</td>
+      <td>/users/[Username]</td>
+      <td>GET</td>
+      <td></td>
+      <td>"12345678",</td>
+    </tr>
+    <tr>
+      <td>Allow users to update their user info</td>
+      <td>/users/[Username]</td>
+      <td>PUT</td>
+      <td>{<br>"Username" : "MovieGuy555",<br>"Password" :  "12345678",<br>"Email" : "movieguy555@gmail.com",<br>"Birthday" : "01/01/80"<br>}</td>
+      <td>A JSON object holding data about the user info updated.</td>
+    </tr>
+    <tr>
+      <td>Allow users to add a movie to their list of favorites</td>
+      <td>/users/[Username]/favorites</td>
+      <td>PUT</td>
+      <td></td>
+      <td>A JSON object holding data about the user the favorited title by Movie ID that was added to. Formatted:<br>{<br>"_id" :  "61579244b61674c21f372eec",<br>"Username" : "MovieGuy555",<br>"Password" :  "12345678",<br>"Email" : "movieguy555@gmail.com",<br>"Birthday" : "1980-01-01T05:00:00.000Z",<br>"FavoriteMovies" : [ "61534a44fe7a57055294b89f" ],<br>"__v" : 0<br>}</td>
+    </tr>
+    <tr>
+      <td>Allow users to remove a movie from their list of favorites</td>
+      <td>/users/[Username]/favorites</td>
+      <td>PUT</td>
+      <td></td>
+      <td>A JSON object showing the favorited title by Movie ID that was removed.</td>
+    </tr>
+    <tr>
+      <td>Allow existing users to deregister</td>
+      <td>/users</td>
+      <td>DELETE</td>
+      <td></td>
+      <td>A text message showing that the user was deleted.</td>
+    </tr>
+  </tbody>
+  </table>
