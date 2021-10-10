@@ -2,26 +2,26 @@ const express = require('express'),
 morgan = require('morgan'),
 uuid = require('uuid'),
 mongoose = require('mongoose'),
-Models = require('./models.js');
+Models = require('./models.js'),
+app = express(),
+Movies = Models.Movie,
+Users = Models.User,
+auth = require('./auth')(app),
+passport = require('passport');
 
-const app = express();
+require('./passport');
+
 app.use(express.json());
 app.use(express.urlencoded({ extdended: true}));
-const Movies = Models.Movie;
-const Users = Models.User;
+//returns static files from public folder
+app.use(express.static('public'));
+//uses morgan to log requests
+app.use(morgan('common'));
 
 //connects to movie_api database
 mongoose.connect('mongodb://localhost:27017/movie_api',
 {useNewUrlParser: true, useUnifiedTopology: true
 });
-
-//imports auth.js file
-app.use(express.urlencoded({ extended: true }));
-let auth = require('./auth')(app);
-
-const passport = require('passport');
-require('./passport');
-
 
 //get all movies
 app.get('/movies', passport.authenticate('jwt', { session: false }),
@@ -195,22 +195,9 @@ app.get('/', (req, res) => {
   res.send('Welcome to my Movies app!');
 });
 
-//returns static files from public folder
-app.use(express.static('public'));
-
-//uses morgan to log requests
-app.use(morgan('common'));
-
 //error handling
-// const express = require('body-parser'),
 methodOverride = require('method-override');
 
-app.use(express.urlencoded({
-  extdended: true
-}));
-
-app.use(express.json());
-app.use(methodOverride());
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
