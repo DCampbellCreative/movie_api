@@ -204,7 +204,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
   });
 });
 
-//deletes a movie to a user's list of favorites
+//deletes a movie from a user's list of favorites
 app.put('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }),
 (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username },
