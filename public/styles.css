@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
+
+
 table, th, td {
   text-align: center;
   border: 3px solid black;
   border-collapse: collapse;
+}
+
+.codesnippet {
+  font-family: 'PT Mono', monospace;
 }
